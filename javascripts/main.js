@@ -107,7 +107,7 @@ function showBBDetail(block) {
                 <div class="concept-art BB-detail-content">
                     <div>
                         <div class="mb-1">原作設定集:</div>
-                        ${'無'}
+                        ${'無。'}
                     </div>
                 </div>
                 `,

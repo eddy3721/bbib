@@ -47,6 +47,16 @@ async function homeReady() {
     $('#BBTotal').text(localStorageGetItem('BBData').data.length);
 }
 
+//載入原作設定集
+function loadCollections(name, n) {
+    let content = '';
+    for (let i = 1; i <= n; i++) {
+        content += `<img src="./images/collections/${name}_${i}.png" alt="" class="collections-img" />`;
+    }
+
+    return content;
+}
+
 //獲取網址參數
 function getUrlParams() {
     let urlParams = new URLSearchParams(window.location.search);
@@ -96,7 +106,7 @@ function showBBDetail(block) {
                 <p>${rare}</p>
                 <div class="BB-detail">
                     <div class="BB-detail-img">
-                        <img src="./images/${BBDetail.name}.png" onerror="this.src='./images/unknown.png'" alt="">
+                        <img src="./images/${BBDetail.name}.png" onerror="this.src='./images/unknown.png'" alt="" />
                     </div>
                     <div class="BB-detail-content">
                         <div><label>原作者:&nbsp;</label>${BBDetail.originalAuthor}</div>
@@ -106,8 +116,8 @@ function showBBDetail(block) {
                 </div>
                 <div class="concept-art BB-detail-content">
                     <div>
-                        <div class="mb-1">原作設定集:</div>
-                        ${'無。'}
+                        <div class="mb-2">原作設定集:</div>
+                        ${loadCollections(BBDetail.name, BBDetail.collectionsQuantity)}
                     </div>
                 </div>
                 `,
@@ -225,7 +235,8 @@ async function ready() {
                 'rare': d[i++],
                 'originalAuthor': d[i++],
                 'freeToUse': d[i++],
-                'introduce': d[i++]
+                'introduce': d[i++],
+                'collectionsQuantity': d[i++]
             });
         }
 

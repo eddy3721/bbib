@@ -274,6 +274,11 @@ body.swal2-height-auto {
     background-color: #6176c5!important;
 }
 
+.collections-img {
+    max-width: 512px;
+    width: 100%;
+}
+
 @media (max-width: 576px) {
     #menu {
         z-index: 2;

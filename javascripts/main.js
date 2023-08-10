@@ -50,8 +50,10 @@ async function homeReady() {
 //載入原作設定集
 function loadCollections(name, n) {
     let content = '';
-    for (let i = 1; i <= n; i++) {
-        content += `<img src="./images/collections/${name}_${i}.png" alt="" class="collections-img" />`;
+    if (n) {
+        for (let i = 1; i <= n; i++) {
+            content += `<img src="./images/collections/${name}_${i}.png" alt="" class="collections-img" />`;
+        }
     }
 
     return content;

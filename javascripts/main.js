@@ -9,7 +9,11 @@ var menuList = [
     ['./index.html', '首頁', null],
     ['./bbList.html', '怪物一覽', null],
     ['BBClassificationSublist', '怪物分類', [
-        ['BBRareSublist1', '稀有度', [
+        ['BBOrderSublist', '時間', [
+            ['./bbList.html?order=fromNewToOld', '由新到舊(預設)', null],
+            ['./bbList.html?order=fromOldToNew', '由舊到新', null]
+        ]],
+        ['BBRareSublist', '稀有度', [
             ['./bbList.html?rare=1', '★', null],
             ['./bbList.html?rare=2', '★★', null],
             ['./bbList.html?rare=3', '★★★', null],
@@ -139,6 +143,10 @@ async function loadBBData() {
     let urlParamsArr = getUrlParams();
     //條件篩選
     urlParamsArr.forEach(condition => {
+        if (condition[0] === 'order') {
+            if (condition[1] == 'fromOldToNew') BBData = BBData.reverse(); //由舊到新
+            return;
+        }
         BBData = BBData.filter(BB => BB[condition[0]] === condition[1]);
     });
 
@@ -241,6 +249,8 @@ async function ready() {
                 'collectionsQuantity': d[i++]
             });
         }
+
+        arr = arr.reverse(); //由新到舊
 
         let obj = {
             refreshTime: Math.floor((+nowTime) / 1000), //上次刷新時間

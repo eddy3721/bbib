@@ -56,7 +56,7 @@ function loadCollections(name, n) {
     let content = '';
     if (n) {
         for (let i = 1; i <= n; i++) {
-            content += `<img src="./images/collections/${name}_${i}.png" alt="" class="collections-img" />`;
+            content += `<img src="./images/collections/${name}_${i}.webp" alt="" class="collections-img" />`;
         }
     }
 
@@ -258,6 +258,7 @@ async function ready() {
         };
 
         $('#last-refresh-time').text(nowTime.toLocaleDateString() + nowTime.toLocaleTimeString());
+        //console.log(arr);
         //console.log(JSON.stringify(obj).length);
         //console.log(LZString.compress(JSON.stringify(obj)).length);
         localStorage.setItem('BBData', LZString.compress(JSON.stringify(obj)));

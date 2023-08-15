@@ -63,8 +63,6 @@ body.swal2-height-auto {
     padding: 5rem 1rem 1rem 250px;
     z-index: 1;
     width: 100%;
-    display: flex;
-    align-items: baseline;
 }
 
 #menu-switch:checked~#main {
@@ -216,6 +214,10 @@ body.swal2-height-auto {
     filter: drop-shadow(0px 5px 2px #222);
 }
 
+.filter-checked {
+    background-color: var(--gray-4);
+}
+
 @-webkit-keyframes baloon_1 {
     0% {
         transform: translateY(0px);
@@ -277,6 +279,11 @@ body.swal2-height-auto {
 .collections-img {
     max-width: 512px;
     width: 100%;
+}
+
+#BBList {
+    display: flex;
+    align-items: baseline;
 }
 
 @media (max-width: 576px) {

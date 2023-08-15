@@ -8,21 +8,11 @@ var googleSheet = {
 var menuList = [
     ['./index.html', '首頁', null],
     ['./bbList.html', '怪物一覽', null],
-    ['BBClassificationSublist', '怪物分類', [
-        ['BBOrderSublist', '時間', [
-            ['./bbList.html?order=fromNewToOld', '由新到舊(預設)', null],
-            ['./bbList.html?order=fromOldToNew', '由舊到新', null]
-        ]],
-        ['BBRareSublist', '稀有度', [
-            ['./bbList.html?rare=1', '★', null],
-            ['./bbList.html?rare=2', '★★', null],
-            ['./bbList.html?rare=3', '★★★', null],
-            ['./bbList.html?rare=4', '★★★★', null],
-            ['./bbList.html?rare=5', '★★★★★', null]
-        ]]
-    ]],
     ['./about.html', '關於', null]
-]
+];
+
+//已選擇篩選器紀錄
+var filters = [];
 
 //右上通知
 var Toast = Swal.mixin({
@@ -42,6 +32,7 @@ async function BBListReady() {
     await loadMenu();
     await ready();
     await loadBBData();
+    await loadFilter();
 }
 
 //index.html
@@ -49,6 +40,38 @@ async function homeReady() {
     await loadMenu();
     await ready();
     $('#BBTotal').text(localStorageGetItem('BBData').data.length);
+}
+
+//給怪物添加標籤
+function BBAddLabel(BB) {
+    let label = '';
+    label += ` rare-${BB.rare}`;
+
+    return label;
+}
+
+//載入篩選器
+async function loadFilter() {
+    let $grid = $('#BBList').isotope({
+        // options
+        itemSelector: '.role',
+        layoutMode: 'fitRows'
+    });
+    $('.filter-button-group').on('click', 'button', function(event) {
+        $(this).toggleClass("filter-checked");
+
+        let checked = $(this).hasClass("filter-checked");
+        let filterValue = $(this).attr('data-filter');
+        let filterIndex = filters.indexOf(filterValue);
+
+        if (filterIndex === -1) {
+            filters.push(filterValue);
+        } else {
+            filters.splice(filterIndex, 1);
+        }
+        console.log(filters);
+        $grid.isotope({ filter: filters.join(',') });
+    });
 }
 
 //載入原作設定集
@@ -61,17 +84,6 @@ function loadCollections(name, n) {
     }
 
     return content;
-}
-
-//獲取網址參數
-function getUrlParams() {
-    let urlParams = new URLSearchParams(window.location.search);
-    let urlParamsArr = [];
-    for (const arr of urlParams) {
-        urlParamsArr.push(arr);
-    }
-
-    return urlParamsArr;
 }
 
 //清空BBData
@@ -139,23 +151,12 @@ async function loadBBData() {
     let BBData = localStorageGetItem('BBData').data;
     if (!BBData) return;
 
-    //獲取網址參數
-    let urlParamsArr = getUrlParams();
-    //條件篩選
-    urlParamsArr.forEach(condition => {
-        if (condition[0] === 'order') {
-            if (condition[1] == 'fromOldToNew') BBData = BBData.reverse(); //由舊到新
-            return;
-        }
-        BBData = BBData.filter(BB => BB[condition[0]] === condition[1]);
-    });
-
     let content = '';
     content += `<div class="row">`;
 
     BBData.forEach(e => {
         content += `
-            <div class="role" onClick="showBBDetail(this);">
+            <div class="role${BBAddLabel(e)}" onClick="showBBDetail(this);">
                 <div>
                     <img src="./images/${e.name}_avatar.png" onerror="this.src='./images/unknown_avatar.png'" alt="">
                 </div>
@@ -165,7 +166,7 @@ async function loadBBData() {
 
     content += `</div>`;
 
-    $('#main').html(content);
+    $('#BBList').html(content);
 }
 
 //載入菜單

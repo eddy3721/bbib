@@ -28,11 +28,23 @@
 
         </div>
         <div class="" id="main">
-            <div class="role">
-                <div>
-                    <img src="./images/icons/loading.gif" alt="">
+            <div id="filter">
+                <div class="button-group filter-button-group">
+                    <button data-filter="*">全部</button>
+                    <button data-filter=".rare-5">★★★★★</button>
+                    <button data-filter=".rare-4">★★★★</button>
+                    <button data-filter=".rare-3">★★★</button>
+                    <button data-filter=".rare-2">★★</button>
+                    <button data-filter=".rare-1">★</button>
                 </div>
-                <p>加載中...</p>
+            </div>
+            <div id="BBList">
+                <div class="role">
+                    <div>
+                        <img src="./images/icons/loading.gif" alt="">
+                    </div>
+                    <p>加載中...</p>
+                </div>
             </div>
         </div>
     </div>
@@ -46,6 +58,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
     <script src="https://kit.fontawesome.com/3b144fbd62.js " crossorigin="anonymous "></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js "></script>
+    <script src="./javascripts/isotope.pkgd.min.js"></script>
     <script language="javascript" src="./javascripts/lz-string-1.3.3-min.js"></script>
 </body>
 

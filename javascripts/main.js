@@ -55,12 +55,16 @@ async function loadFilter() {
     let $grid = $('#BBList').isotope({
         // options
         itemSelector: '.role',
-        layoutMode: 'fitRows'
+        layoutMode: 'fitRows',
+        getSortData: {
+            role: '.role'
+        },
     });
-    $('.filter-button-group').on('click', 'button', function(event) {
+
+    //篩選
+    $('.filter-button-group').on('click', 'button', function() {
         $(this).toggleClass("filter-checked");
 
-        let checked = $(this).hasClass("filter-checked");
         let filterValue = $(this).attr('data-filter');
         let filterIndex = filters.indexOf(filterValue);
 
@@ -71,6 +75,18 @@ async function loadFilter() {
         }
         console.log(filters);
         $grid.isotope({ filter: filters.join(',') });
+    });
+
+    //排序
+    $('.sorter-button-group').on('click', 'button', function() {
+        let checked = $(this).text() === '由新到舊(目前)';
+        $(this).text(checked ? '由舊到新(目前)' : '由新到舊(目前)');
+
+        if (checked) {
+            $grid.isotope({ sortBy: 'role', sortAscending: false });
+        } else {
+            $grid.isotope({ sortBy: 'role', sortAscending: true });
+        }
     });
 }
 

@@ -40,6 +40,24 @@ async function homeReady() {
     await loadMenu();
     await ready();
     $('#BBTotal').text(localStorageGetItem('BBData').data.length);
+    loadColorPicker();
+}
+
+//載入調色盤
+function loadColorPicker() {
+    $('#colorPicker').colpick({
+        polyfill: true,
+        onShow: function(colpk) {
+            $(colpk).fadeIn(300);
+            return false;
+        },
+        onChange: function(hsb, hex, rgb, el) {
+            $(el).val('#' + hex);
+            $(el).css("color", '#' + hex);
+            document.documentElement.style.setProperty('--blue-1', '#' + hex);
+
+        }
+    });
 }
 
 //給怪物添加標籤

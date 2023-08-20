@@ -13,6 +13,7 @@
     --gray-7: rgb(120, 120, 120);
     --gray-8: rgb(100, 100, 100);
     --gray-9: rgb(80, 80, 80);
+    --blue-1: rgb(17, 127, 229);
 }
 
 @font-face {
@@ -260,7 +261,7 @@ body.swal2-height-auto {
 }
 
 #BBTotal {
-    color: #117fe5;
+    color: var(--blue-1);
 }
 
 .btn-discord {
@@ -286,7 +287,7 @@ body.swal2-height-auto {
     margin: 10px 0px;
 }
 
-.button-group button {
+.filter-button {
     border-radius: 5px;
     border: 1px solid var(--gray-3);
     background-color: var(--gray-1);
@@ -294,7 +295,7 @@ body.swal2-height-auto {
     padding: 5px 10px;
 }
 
-.button-group button:hover {
+.filter-button:hover {
     background-color: var(--gray-3);
     border: 1px solid var(--gray-5);
 }
@@ -303,6 +304,14 @@ body.swal2-height-auto {
     background-color: var(--gray-4)!important;
     border: 1px solid var(--gray-6)!important;
     color: var(--gray-1);
+}
+
+.colpick_full {
+    z-index: 2;
+}
+
+.colpick_field_letter {
+    width: 17px!important;
 }
 
 @media (max-width: 576px) {

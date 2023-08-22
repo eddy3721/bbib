@@ -309,6 +309,10 @@ body.swal2-height-auto {
     width: 17px!important;
 }
 
+#BBList {
+    display: flex;
+}
+
 @media (max-width: 576px) {
     #menu {
         z-index: 2;

@@ -278,11 +278,6 @@ body.swal2-height-auto {
     width: 100%;
 }
 
-#BBList {
-    display: flex;
-    align-items: baseline;
-}
-
 .button-group {
     margin: 10px 0px;
 }
